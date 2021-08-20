@@ -1,11 +1,16 @@
 <template>
     <div>
         <h3>Цена</h3>
-        <input type="text" v-model="min" class="priseDisplay"> -
-        <input type="text" v-model="max" class="priseDisplay">
-
-        <DoubleRangeSlider :min-range="0" :max-range="100500" :minPoint="+min" :maxPoint="+max" @input="changeRange"></DoubleRangeSlider>
-
+        <div class="display-wrapper">
+            <input type="text" v-model="min" class="priseDisplay">
+            <span>-</span>
+            <input type="text" v-model="max" class="priseDisplay">
+        </div>
+        <DoubleRangeSlider :min-range="0"
+                           :max-range="100500"
+                           :minPoint="+min"
+                           :maxPoint="+max" @input="changeRange">
+        </DoubleRangeSlider>
     </div>
 </template>
 
@@ -21,8 +26,6 @@ import DoubleRangeSlider from '../doubleRange/DoubleRangeSlider';
     },
     data () {
       return {
-        // min: 0,
-        // max: 10050,
         min: this.value[0],
         max: this.value[1],
       }
@@ -30,8 +33,7 @@ import DoubleRangeSlider from '../doubleRange/DoubleRangeSlider';
     methods: {
       changeRange(range) {
         [this.min, this.max] = [...range];
-        // this.$emit('changePriceRange', {min: this.min, max:this.max});
-        this.$emit('input',  [this.min, this.max]);
+        this.$emit('input', [this.min, this.max]);
       }
     },
     watch: {
@@ -46,8 +48,7 @@ import DoubleRangeSlider from '../doubleRange/DoubleRangeSlider';
         }
       },
       value(newVal) {
-        this.min = newVal[0];
-        this.max = newVal[1];
+        [this.min, this.max] = [...newVal];
       }
     },
     components: {
@@ -57,9 +58,16 @@ import DoubleRangeSlider from '../doubleRange/DoubleRangeSlider';
 </script>
 
 <style scoped>
+.display-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 .priseDisplay {
     border: 1px solid #EAEAEA;
     border-radius: 8px;
     padding: 14px;
+
+    width: 35%;
 }
 </style>

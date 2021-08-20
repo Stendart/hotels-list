@@ -9,7 +9,8 @@
                   @changePriceRange="setPriceRange"
 
                   @applyFilters="applyFilters"></AppFilters>
-      <HotelsList :hotels="hotelsList" class="hotel-wrapper"></HotelsList>
+      <HotelsList v-if="hotelsList.length" :hotels="hotelsList" class="data-wrapper"></HotelsList>
+      <h3 v-else class="data-wrapper data-text">Записей не найдено</h3>
     </main>
   </div>
 </template>
@@ -18,7 +19,7 @@
 import hotels from "./assets/hotels.json";
 import country from "./assets/country.json";
 
-import AppFilters from './components/filters/AppFilters';
+import AppFilters from './components/AppFilters';
 import HotelsList from './components/HotelsList';
 
 export default {
@@ -54,35 +55,23 @@ export default {
 
     applyFilters(filtersParams) {
       this.filtersParams = filtersParams;
-
-      // console.log('filtersParams', filtersParams)
-      // console.log('hotelsList', this.hotels)
-      //
-      // const filteredByCountry = this.filteredByParam(this.hotels, 'country', filtersParams.selectCountryList);
-      // const filteredByType = this.filteredByParam(filteredByCountry, 'type', filtersParams.selectTypeList);
-      // const filteredByStars = this.filteredByParam(filteredByType, 'stars', filtersParams.selectStars);
-      //
-      // const filteredByReviews = this.filteredByCompaire(filteredByStars, 'reviews_amount', filtersParams.reviewsCount);
-      // const filteredByPrice = this.filteredByCompaire(filteredByReviews, 'min_price', filtersParams.priceRange[0], filtersParams.priceRange[1])
-      // console.log('Отсортированный итог', filteredByPrice)
     },
 
     filteredByParam(arr, fieldName, param) {
       return arr.filter(el => {
-        return param.includes(el[fieldName])
+        return param.includes(el[fieldName]);
       })
     },
     filteredByCompaire(arr, fieldName, param1, param2) {
       if(!param2) {
         return arr.filter(el => {
-          return el[fieldName] > param1
+          return el[fieldName] > param1;
         })
       } else {
         return arr.filter(el => {
-          return el[fieldName] > param1 && el[fieldName] < param2
+          return el[fieldName] > param1 && el[fieldName] < param2;
         })
       }
-
     }
   },
   computed: {
@@ -90,9 +79,6 @@ export default {
       return country;
     },
     hotelsList() {
-      console.log('filtersParams', this.filtersParams)
-      console.log('filtersParams', !this.filtersParams)
-      console.log('hotelsList', this.hotels)
       if(!this.filtersParams) {
         return this.hotels;
       }
@@ -103,8 +89,7 @@ export default {
 
       const filteredByReviews = this.filteredByCompaire(filteredByStars, 'reviews_amount', this.filtersParams.reviewsCount);
       const filteredByPrice = this.filteredByCompaire(filteredByReviews, 'min_price', this.filtersParams.priceRange[0], this.filtersParams.priceRange[1])
-      console.log('Отфильтрованный итог', filteredByPrice)
-      return filteredByPrice
+      return filteredByPrice;
     }
   },
   components: {
@@ -119,11 +104,8 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*text-align: center;*/
   color: #2c3e50;
   margin-top: 60px;
-
-
 }
 
   .main {
@@ -137,7 +119,10 @@ export default {
   .filter-wrapper {
     width: 30%;
   }
-  .hotel-wrapper {
+  .data-wrapper {
     width: 65%;
+  }
+  .data-text {
+    text-align: center;
   }
 </style>

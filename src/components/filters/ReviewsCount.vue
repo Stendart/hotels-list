@@ -1,18 +1,13 @@
 <template>
     <div>
         <h3>Количество отзывов (от)</h3>
-        <input type="text" :value="value" @input="checkNatural">
+        <input type="text" class="review" :value="value" @input="checkNatural">
     </div>
 </template>
 
 <script>
   export default {
     name: "ReviewsCount",
-    // data() {
-    //   return {
-    //     count: null
-    //   }
-    // },
     props: {
       value: {
         default: 0
@@ -34,5 +29,10 @@
 </script>
 
 <style scoped>
+.review {
+    border: 1px solid #EAEAEA;
+    border-radius: 10px;
 
+    padding: 14px 20px;
+}
 </style>

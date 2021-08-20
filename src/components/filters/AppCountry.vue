@@ -20,19 +20,18 @@ import CheckboxGroup from './CheckboxGroup';
   export default {
     name: "AppCountry",
     props: {
-      countryList: {},
+      countryList: {
+        type: Object
+      },
       value: {}
     },
     data() {
       return {
         searchString: '',
-        // selectCountryList: ['Алжир']
       }
     },
     methods: {
       setSelectCountry(countryList) {
-        // this.selectCountryList = countryList;
-        // this.$emit('changeCountryList', this.selectCountryList);
         this.$emit('input', countryList);
       }
     },

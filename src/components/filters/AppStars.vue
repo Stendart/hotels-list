@@ -26,8 +26,6 @@ import CheckboxGroup from './CheckboxGroup';
     methods: {
       setStars(stars) {
         this.stars = stars;
-        // console.log(stars)
-        // this.$emit('changeStars', this.stars);
         this.$emit('input', stars);
       },
     },

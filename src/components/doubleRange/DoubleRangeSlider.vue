@@ -19,9 +19,10 @@
 </template>
 
 <script>
-  import './vue-range-slider.css'
-  import './inputRange.css'
-  import VueRangeSlider from './inputRange'
+import './vue-range-slider.css'
+import './inputRange.css'
+import VueRangeSlider from './inputRange'
+
   export default {
     name: "inputRange",
     props: {

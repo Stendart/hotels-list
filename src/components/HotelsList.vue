@@ -1,16 +1,16 @@
 <template>
     <div>
-        <HotelCard v-for="hotel in cutOnPage" :hotel="hotel"></HotelCard>
+        <HotelCard v-for="hotel in cutOnPage" :hotel="hotel" class="card"></HotelCard>
         <div class="btn-wrapper">
             <button class="btn" @click="page--">Назад</button>
-            <span>{{page}}</span>
+            <span>{{page}} / {{countPage}}</span>
             <button class="btn" @click="page++">Вперед</button>
         </div>
     </div>
 </template>
 
 <script>
-import HotelCard from './HotelCard';
+import HotelCard from './Hotels/HotelCard';
 
   export default {
     name: "HotelsList",
@@ -50,6 +50,9 @@ import HotelCard from './HotelCard';
 </script>
 
 <style scoped>
+.card {
+    margin-top: 30px;
+}
 .btn-wrapper {
     display: flex;
     justify-content: space-around;

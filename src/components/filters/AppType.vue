@@ -22,8 +22,6 @@ import CheckboxGroup from './CheckboxGroup';
     methods: {
       setType(type) {
         this.types = type;
-        // console.log('types = ', this.types);
-        // this.$emit('changeType', this.types);
         this.$emit('input', type);
       }
     },

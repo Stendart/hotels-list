@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import AppCountry from './AppCountry';
-import AppType from './AppType';
-import AppStars from './AppStars';
-import ReviewsCount from './ReviewsCount';
-import Price from './Price';
+import AppCountry from './filters/AppCountry';
+import AppType from './filters/AppType';
+import AppStars from './filters/AppStars';
+import ReviewsCount from './filters/ReviewsCount';
+import Price from './filters/Price';
 
   export default {
     name: "AppFilters",
@@ -46,17 +46,6 @@ import Price from './Price';
     },
     methods: {
       applyFilters() {
-        // const arr = this.selectStars.reduce((acc, el) => {
-        //   acc.push(parseInt(el))
-        //   return acc
-        // },[])
-        // const filtersParams = {
-        //   selectCountryList: this.selectCountryList,
-        //   selectTypeList: this.selectTypeList,
-        //   selectStars: arr,
-        //   reviewsCount: this.reviewsCount,
-        //   priceRange: this.priceRange,
-        // }
         this.$emit('applyFilters', this.collectParams);
       },
       resetFilteres() {

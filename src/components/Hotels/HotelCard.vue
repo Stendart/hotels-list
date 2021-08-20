@@ -7,11 +7,10 @@
                     <star-rating :max="5" :current="hotel.stars"></star-rating>
                 </span>
                 <span class="info-content-element">{{hotel.type}}</span>
-                <span class="info-content-element">{{hotel.reviews_amount + ' ' + reviews}}</span>
+                <span class="info-content-element">{{`${hotel.reviews_amount} ${reviews}`}}</span>
                 <span>&#9971; {{hotel.country}}</span>
             </div>
             <p>{{hotel.description}}</p>
-
         </div>
         <div class="card-price">
             <p>{{hotel.min_price}} руб</p>
@@ -21,8 +20,9 @@
 </template>
 
 <script>
-    import {declOfNum} from '../utils';
-    import starRating from './starRating';
+import {declOfNum} from '../../utils';
+import starRating from './StarRating';
+
   export default {
     name: "HotelCard",
     props: {
