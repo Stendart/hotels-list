@@ -25,6 +25,9 @@ export default {
   name: 'App',
   data() {
     return {
+      hotels: hotels.hotels,
+      filtersParams: null,
+
       selectCountryList: [],
       selectTypeList: [],
       selectStars: [],
@@ -32,10 +35,6 @@ export default {
       priceRange: {},
     }
   },
-  // created() {
-  //   console.log('test', hotels)
-  //   console.log('country', country)
-  // },
   methods: {
     setCountryList(list) {
       this.selectCountryList = list;
@@ -54,16 +53,18 @@ export default {
     },
 
     applyFilters(filtersParams) {
-      console.log('filtersParams', filtersParams)
-      console.log('hotelsList', this.hotelsList)
+      this.filtersParams = filtersParams;
 
-      const filteredByCountry = this.filteredByParam(this.hotelsList, 'country', filtersParams.selectCountryList);
-      const filteredByType = this.filteredByParam(filteredByCountry, 'type', filtersParams.selectTypeList);
-      const filteredByStars = this.filteredByParam(filteredByType, 'stars', filtersParams.selectStars);
-
-      const filteredByReviews = this.filteredByCompaire(filteredByStars, 'reviews_amount', filtersParams.reviewsCount);
-      const filteredByPrice = this.filteredByCompaire(filteredByReviews, 'min_price', filtersParams.priceRange[0], filtersParams.priceRange[1])
-      console.log('Отсортированный итог', filteredByPrice)
+      // console.log('filtersParams', filtersParams)
+      // console.log('hotelsList', this.hotels)
+      //
+      // const filteredByCountry = this.filteredByParam(this.hotels, 'country', filtersParams.selectCountryList);
+      // const filteredByType = this.filteredByParam(filteredByCountry, 'type', filtersParams.selectTypeList);
+      // const filteredByStars = this.filteredByParam(filteredByType, 'stars', filtersParams.selectStars);
+      //
+      // const filteredByReviews = this.filteredByCompaire(filteredByStars, 'reviews_amount', filtersParams.reviewsCount);
+      // const filteredByPrice = this.filteredByCompaire(filteredByReviews, 'min_price', filtersParams.priceRange[0], filtersParams.priceRange[1])
+      // console.log('Отсортированный итог', filteredByPrice)
     },
 
     filteredByParam(arr, fieldName, param) {
@@ -89,7 +90,21 @@ export default {
       return country;
     },
     hotelsList() {
-      return hotels.hotels;
+      console.log('filtersParams', this.filtersParams)
+      console.log('filtersParams', !this.filtersParams)
+      console.log('hotelsList', this.hotels)
+      if(!this.filtersParams) {
+        return this.hotels;
+      }
+
+      const filteredByCountry = this.filteredByParam(this.hotels, 'country', this.filtersParams.selectCountryList);
+      const filteredByType = this.filteredByParam(filteredByCountry, 'type', this.filtersParams.selectTypeList);
+      const filteredByStars = this.filteredByParam(filteredByType, 'stars', this.filtersParams.selectStars);
+
+      const filteredByReviews = this.filteredByCompaire(filteredByStars, 'reviews_amount', this.filtersParams.reviewsCount);
+      const filteredByPrice = this.filteredByCompaire(filteredByReviews, 'min_price', this.filtersParams.priceRange[0], this.filtersParams.priceRange[1])
+      console.log('Отфильтрованный итог', filteredByPrice)
+      return filteredByPrice
     }
   },
   components: {

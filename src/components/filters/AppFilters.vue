@@ -45,35 +45,37 @@ import Price from './Price';
       }
     },
     methods: {
-      /*changeCountryList(countryList) {
-        // this.$emit('changeCountryList', countryList);
-        this.selectCountryList = countryList;
-      },
-      changeType(type) {
-        // this.$emit('changeType', type);
-        this.selectTypeList = type;
-      },
-      changeStars(stars) {
-        // this.$emit('changeStars', stars);
-        this.selectStars = stars;
-      },
-      changeReviewsCount(reviewsCount) {
-        // this.$emit('changeReviewsCount', reviewsCount);
-        this.reviewsCount = reviewsCount;
-      },
-      changePriceRange(priceRange) {
-        // this.$emit('changePriceRange', priceRange);
-        this.priceRange = priceRange;
-      },
-*/
-
-
-
       applyFilters() {
+        // const arr = this.selectStars.reduce((acc, el) => {
+        //   acc.push(parseInt(el))
+        //   return acc
+        // },[])
+        // const filtersParams = {
+        //   selectCountryList: this.selectCountryList,
+        //   selectTypeList: this.selectTypeList,
+        //   selectStars: arr,
+        //   reviewsCount: this.reviewsCount,
+        //   priceRange: this.priceRange,
+        // }
+        this.$emit('applyFilters', this.collectParams);
+      },
+      resetFilteres() {
+        this.selectCountryList = ['Греция'];
+        this.selectTypeList = ['Отель'];
+        this.selectStars = ['4 звезды'];
+        this.reviewsCount = 0;
+        this.priceRange = [0, 100500];
+
+        this.$emit('applyFilters', this.collectParams);
+      }
+    },
+    computed: {
+      collectParams() {
         const arr = this.selectStars.reduce((acc, el) => {
           acc.push(parseInt(el))
           return acc
         },[])
+
         const filtersParams = {
           selectCountryList: this.selectCountryList,
           selectTypeList: this.selectTypeList,
@@ -81,15 +83,11 @@ import Price from './Price';
           reviewsCount: this.reviewsCount,
           priceRange: this.priceRange,
         }
-        this.$emit('applyFilters', filtersParams);
-      },
-      resetFilteres() {
-        this.selectCountryList = [];
-        this.selectTypeList = [];
-        this.selectStars = [];
-        this.reviewsCount = 0;
-        this.priceRange = [0, 100500]
+        return filtersParams
       }
+    },
+    mounted() {
+      this.resetFilteres();
     },
     components: {
       AppCountry,

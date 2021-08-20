@@ -20,14 +20,14 @@ import CheckboxGroup from './CheckboxGroup';
     },
     data() {
       return {
-        stars: this.value // ['1 звезда', '4 звезды'],
+        stars: this.value
       }
     },
     methods: {
       setStars(stars) {
         this.stars = stars;
-        console.log(stars)
-        this.$emit('changeStars', this.stars);
+        // console.log(stars)
+        // this.$emit('changeStars', this.stars);
         this.$emit('input', stars);
       },
     },

@@ -26,13 +26,13 @@ import CheckboxGroup from './CheckboxGroup';
     data() {
       return {
         searchString: '',
-        selectCountryList: ['Алжир']
+        // selectCountryList: ['Алжир']
       }
     },
     methods: {
       setSelectCountry(countryList) {
-        this.selectCountryList = countryList;
-        this.$emit('changeCountryList', this.selectCountryList);
+        // this.selectCountryList = countryList;
+        // this.$emit('changeCountryList', this.selectCountryList);
         this.$emit('input', countryList);
       }
     },

@@ -30,7 +30,7 @@ import DoubleRangeSlider from '../doubleRange/DoubleRangeSlider';
     methods: {
       changeRange(range) {
         [this.min, this.max] = [...range];
-        this.$emit('changePriceRange', {min: this.min, max:this.max});
+        // this.$emit('changePriceRange', {min: this.min, max:this.max});
         this.$emit('input',  [this.min, this.max]);
       }
     },
