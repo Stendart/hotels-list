@@ -1,12 +1,12 @@
 <template>
     <div>
-        <AppCountry :countryList="country"></AppCountry>
-        <AppType :type-list="typeList"></AppType>
-        <AppStars></AppStars>
-        <ReviewsCount></ReviewsCount>
-        <Price></Price>
+        <AppCountry :countryList="country" @changeCountryList="changeCountryList"></AppCountry>
+        <AppType :type-list="typeList" @changeType="changeType"></AppType>
+        <AppStars @changeStars="changeStars"></AppStars>
+        <ReviewsCount @input="changeReviewsCount"></ReviewsCount>
+        <Price @changePriceRange="changePriceRange"></Price>
 
-        <button class="btn btn-primary">Применить фильтр</button>
+        <button class="btn btn-primary" @click="applyFilters">Применить фильтр</button>
         <button class="btn btn-clear">Очистить фильтр</button>
     </div>
 </template>
@@ -35,6 +35,54 @@ import Price from './Price';
             title: 'Отель'
           },
         ],
+
+        selectCountryList: [],
+        selectTypeList: [],
+        selectStars: [],
+        reviewsCount: null,
+        priceRange: {},
+      }
+    },
+    methods: {
+      changeCountryList(countryList) {
+        // this.$emit('changeCountryList', countryList);
+        this.selectCountryList = countryList;
+      },
+      changeType(type) {
+        // this.$emit('changeType', type);
+        this.selectTypeList = type;
+      },
+      changeStars(stars) {
+        // this.$emit('changeStars', stars);
+        this.selectStars = stars;
+      },
+      changeReviewsCount(reviewsCount) {
+        // this.$emit('changeReviewsCount', reviewsCount);
+        this.reviewsCount = reviewsCount;
+      },
+      changePriceRange(priceRange) {
+        // this.$emit('changePriceRange', priceRange);
+        this.priceRange = priceRange;
+      },
+
+
+
+
+      applyFilters() {
+
+        const arr = this.selectStars.reduce((acc, el) => {
+          acc.push(parseInt(el))
+          return acc
+        },[])
+
+        const filtersParams = {
+          selectCountryList: this.selectCountryList,
+          selectTypeList: this.selectTypeList,
+          selectStars: arr,
+          reviewsCount: this.reviewsCount,
+          priceRange: this.priceRange,
+        }
+        this.$emit('applyFilters', filtersParams);
       }
     },
     components: {

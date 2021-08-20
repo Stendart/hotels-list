@@ -15,12 +15,15 @@
     name: "CheckboxGroup",
     props: {
       // value: {},
-      listItem: {}
+      listItem: {},
+      defaultVal: {
+        default: () => []
+      }
     },
     data() {
       return {
         // content: this.value,
-        check: []
+        check: this.defaultVal
       }
     },
     methods: {

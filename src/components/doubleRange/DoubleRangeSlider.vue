@@ -1,7 +1,8 @@
 <template>
     <div>
         <vue-range-slider
-                v-model="value"
+                :value="[minPoint, maxPoint]"
+                @input="inputHandler"
                 :min="minRange"
                 :max="maxRange"
                 :enable-cross="false"
@@ -32,15 +33,18 @@
         type: Number,
         default: 100
       },
+      minPoint: {
+        type: Number,
+        default: 0
+      },
+      maxPoint: {
+        type: Number,
+        default: 100
+      },
     },
-    data() {
-      return {
-        value: [this.minRange, this.maxRange]
-      }
-    },
-    watch: {
-      value(val) {
-        this.$emit('input', val)
+    methods: {
+      inputHandler(e) {
+        this.$emit('input', e)
       }
     },
     components: {

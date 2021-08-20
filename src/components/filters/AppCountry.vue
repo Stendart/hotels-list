@@ -20,13 +20,13 @@
 
         </form>
 
-        Выбранные страны = {{selectCountryList}}
+<!--        Выбранные страны = {{selectCountryList}}-->
 
     </div>
 </template>
 
 <script>
-    import CheckboxGroup from './CheckboxGroup';
+import CheckboxGroup from './CheckboxGroup';
 
   export default {
     name: "AppCountry",
@@ -41,8 +41,9 @@
     },
     methods: {
       setSelectCountry(countryList) {
-        this.selectCountryList = countryList
-        console.log(this.selectCountryList)
+        this.selectCountryList = countryList;
+        // console.log(this.selectCountryList)
+        this.$emit('changeCountryList', this.selectCountryList);
       }
     },
     computed: {
@@ -53,8 +54,7 @@
               id: Number(key),
               title: this.countryList.country[key]
             }));
-        console.log('result', result)
-        return result
+        return result;
       },
       filteredCountry() {
         if(!this.searchString) {
