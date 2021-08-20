@@ -106,9 +106,9 @@ import Price from './Price';
     padding: 17px 90px;
 }
 .btn-primary {
-    background: #6A53F5;
+    background: #64cb5e;
     color: #fff;
-    border-color: #6A53F5;
+    border-color: #64cb5e;
 }
 .btn-clear {
     background: #fff;

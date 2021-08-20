@@ -1,18 +1,47 @@
 <template>
     <div>
-        <HotelCard v-for="hotel in hotels" :hotel="hotel"></HotelCard>
+        <HotelCard v-for="hotel in cutOnPage" :hotel="hotel"></HotelCard>
+        <div class="btn-wrapper">
+            <button class="btn" @click="page--">Назад</button>
+            <span>{{page}}</span>
+            <button class="btn" @click="page++">Вперед</button>
+        </div>
     </div>
 </template>
 
 <script>
-    import HotelCard from './HotelCard';
+import HotelCard from './HotelCard';
+
   export default {
     name: "HotelsList",
     props: {
-      hotels: {}
+      hotels: []
     },
-    created() {
-      console.log('hotels = ', this.hotels)
+    data() {
+      return {
+        pageSize: 3,
+        page: 1
+      }
+    },
+    computed: {
+      cutOnPage() {
+        const start = this.pageSize * (this.page - 1)
+        const end = Math.min(this.pageSize * this.page, this.hotels.length)
+
+        return this.hotels.slice(start, end)
+      },
+      countPage() {
+        return Math.ceil(this.hotels.length/this.pageSize);
+      }
+    },
+    watch: {
+      page(newVal, oldVal) {
+        if(newVal < 1) {
+          this.page = oldVal;
+        } else if(newVal > this.countPage) {
+          this.page = oldVal;
+        }
+      }
     },
     components: {
       HotelCard
@@ -21,5 +50,17 @@
 </script>
 
 <style scoped>
+.btn-wrapper {
+    display: flex;
+    justify-content: space-around;
 
+    margin-top: 40px;
+}
+.btn {
+    border-radius: 12px;
+    background-color:rgba(0, 187, 109, 0.1);
+    color: #6A53F5;
+
+    padding: 10px 30px;
+}
 </style>
