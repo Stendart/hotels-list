@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <AppFilters :country="countryList"></AppFilters>
+    <main class="main">
+      <AppFilters :country="countryList" class="filter-wrapper"></AppFilters>
+      <HotelsList :hotels="hotelsList" class="hotel-wrapper"></HotelsList>
+    </main>
   </div>
 </template>
 
@@ -8,7 +11,8 @@
   import hotels from "./assets/hotels.json";
   import country from "./assets/country.json";
 
-  import AppFilters from './components/AppFilters';
+  import AppFilters from './components/filters/AppFilters';
+  import HotelsList from './components/HotelsList';
 
 export default {
   name: 'App',
@@ -19,10 +23,14 @@ export default {
   computed: {
     countryList() {
       return country;
+    },
+    hotelsList() {
+      return hotels.hotels;
     }
   },
   components: {
-    AppFilters
+    AppFilters,
+    HotelsList
   }
 }
 </script>
@@ -35,5 +43,22 @@ export default {
   /*text-align: center;*/
   color: #2c3e50;
   margin-top: 60px;
+
+
 }
+
+  .main {
+    display: flex;
+    justify-content: space-between;
+
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .filter-wrapper {
+    width: 30%;
+  }
+  .hotel-wrapper {
+    width: 65%;
+  }
 </style>

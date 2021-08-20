@@ -6,6 +6,7 @@
 </template>
 
 <script>
+    import {declOfNum} from '../../utils';
     import CheckboxGroup from './CheckboxGroup';
   export default {
     name: "AppStars",
@@ -25,10 +26,10 @@
         this.stars = type;
         console.log('stars = ', this.stars);
       },
-      declOfNum(number, titles) { // проверка окончания существительного после числительного
-        const cases = [2, 0, 1, 1, 1, 2];
-        return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
-      },
+      // declOfNum(number, titles) { // проверка окончания существительного после числительного
+      //   const cases = [2, 0, 1, 1, 1, 2];
+      //   return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
+      // },
     },
     computed: {
       transformStars() {
@@ -37,7 +38,7 @@
           starList.push(
             {
               id: i,
-              title: `${i+1} ${this.declOfNum(i+1, ['звезда', 'звезды', 'звезд'])}`
+              title: `${i+1} ${declOfNum(i+1, ['звезда', 'звезды', 'звезд'])}`
             });
         }
         return starList

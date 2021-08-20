@@ -10,7 +10,7 @@
 </template>
 
 <script>
-    import DoubleRangeSlider from './doubleRange/DoubleRangeSlider';
+    import DoubleRangeSlider from '../doubleRange/DoubleRangeSlider';
 
   export default {
     name: "Price",

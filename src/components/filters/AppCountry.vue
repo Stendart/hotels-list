@@ -75,7 +75,7 @@
         box-sizing: border-box;
         border-radius: 10px;
 
-        background: url("../assets/search.png") center left     no-repeat;
+        background: url("../../assets/search.png") center left     no-repeat;
 
         padding: 14px 0 14px 25px;
     }
