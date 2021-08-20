@@ -10,20 +10,28 @@
 </template>
 
 <script>
-    import DoubleRangeSlider from '../doubleRange/DoubleRangeSlider';
+import DoubleRangeSlider from '../doubleRange/DoubleRangeSlider';
 
   export default {
     name: "Price",
+    props: {
+      value: {
+        default: () => [0, 100500]
+      }
+    },
     data () {
       return {
-        min: 0,
-        max: 10050,
+        // min: 0,
+        // max: 10050,
+        min: this.value[0],
+        max: this.value[1],
       }
     },
     methods: {
       changeRange(range) {
         [this.min, this.max] = [...range];
         this.$emit('changePriceRange', {min: this.min, max:this.max});
+        this.$emit('input',  [this.min, this.max]);
       }
     },
     watch: {
@@ -36,6 +44,10 @@
         if(this.min - val > 0) {
           this.min = val;
         }
+      },
+      value(newVal) {
+        this.min = newVal[0];
+        this.max = newVal[1];
       }
     },
     components: {

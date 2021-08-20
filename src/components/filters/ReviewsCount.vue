@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Количество отзывов (от)</h3>
-        <input type="text" @keyup="checkNatural">
+        <input type="text" :value="value" @input="checkNatural">
     </div>
 </template>
 
@@ -13,6 +13,11 @@
     //     count: null
     //   }
     // },
+    props: {
+      value: {
+        default: 0
+      }
+    },
     methods: {
       isWhole(n) {
         return /^\d+$/.test(n);

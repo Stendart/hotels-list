@@ -1,13 +1,14 @@
 <template>
     <div>
-        <AppCountry :countryList="country" @changeCountryList="changeCountryList"></AppCountry>
-        <AppType :type-list="typeList" @changeType="changeType"></AppType>
-        <AppStars @changeStars="changeStars"></AppStars>
-        <ReviewsCount @input="changeReviewsCount"></ReviewsCount>
-        <Price @changePriceRange="changePriceRange"></Price>
+        <AppCountry :countryList="country" v-model="selectCountryList"></AppCountry>
+        <AppType :type-list="typeList" v-model="selectTypeList"></AppType>
+        <AppStars v-model="selectStars"></AppStars>
+
+        <ReviewsCount v-model="reviewsCount"></ReviewsCount>
+        <Price v-model="priceRange"></Price>
 
         <button class="btn btn-primary" @click="applyFilters">Применить фильтр</button>
-        <button class="btn btn-clear">Очистить фильтр</button>
+        <button class="btn btn-clear" @click="resetFilteres">Очистить фильтр</button>
     </div>
 </template>
 
@@ -39,12 +40,12 @@ import Price from './Price';
         selectCountryList: [],
         selectTypeList: [],
         selectStars: [],
-        reviewsCount: null,
-        priceRange: {},
+        reviewsCount: 0,
+        priceRange: [0, 100500],
       }
     },
     methods: {
-      changeCountryList(countryList) {
+      /*changeCountryList(countryList) {
         // this.$emit('changeCountryList', countryList);
         this.selectCountryList = countryList;
       },
@@ -64,17 +65,15 @@ import Price from './Price';
         // this.$emit('changePriceRange', priceRange);
         this.priceRange = priceRange;
       },
-
+*/
 
 
 
       applyFilters() {
-
         const arr = this.selectStars.reduce((acc, el) => {
           acc.push(parseInt(el))
           return acc
         },[])
-
         const filtersParams = {
           selectCountryList: this.selectCountryList,
           selectTypeList: this.selectTypeList,
@@ -83,6 +82,13 @@ import Price from './Price';
           priceRange: this.priceRange,
         }
         this.$emit('applyFilters', filtersParams);
+      },
+      resetFilteres() {
+        this.selectCountryList = [];
+        this.selectTypeList = [];
+        this.selectStars = [];
+        this.reviewsCount = 0;
+        this.priceRange = [0, 100500]
       }
     },
     components: {

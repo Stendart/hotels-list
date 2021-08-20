@@ -55,16 +55,15 @@ export default {
 
     applyFilters(filtersParams) {
       console.log('filtersParams', filtersParams)
-      // console.log('selectStars', parseInt(filtersParams.selectStars[0]))
       console.log('hotelsList', this.hotelsList)
 
       const filteredByCountry = this.filteredByParam(this.hotelsList, 'country', filtersParams.selectCountryList);
       const filteredByType = this.filteredByParam(filteredByCountry, 'type', filtersParams.selectTypeList);
       const filteredByStars = this.filteredByParam(filteredByType, 'stars', filtersParams.selectStars);
 
-      const filteredByReviews = this.filteredByCompaire(filteredByStars, 'reviews_amount', filtersParams.reviewsCount)
-      const filteredByPrice = this.filteredByCompaire(filteredByReviews, 'min_price', filtersParams.priceRange.min, filtersParams.priceRange.max)
-      console.log('filteredByStars', filteredByPrice)
+      const filteredByReviews = this.filteredByCompaire(filteredByStars, 'reviews_amount', filtersParams.reviewsCount);
+      const filteredByPrice = this.filteredByCompaire(filteredByReviews, 'min_price', filtersParams.priceRange[0], filtersParams.priceRange[1])
+      console.log('Отсортированный итог', filteredByPrice)
     },
 
     filteredByParam(arr, fieldName, param) {

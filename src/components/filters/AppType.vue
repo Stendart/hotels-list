@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Тип</h3>
-        <CheckboxGroup :list-item="typeList" @input="setType"></CheckboxGroup>
+        <CheckboxGroup :list-item="typeList" :default-val="value" @input="setType"></CheckboxGroup>
     </div>
 </template>
 
@@ -11,11 +11,12 @@ import CheckboxGroup from './CheckboxGroup';
   export default {
     name: "AppType",
     props: {
-      typeList: {}
+      typeList: {},
+      value: {}
     },
     data() {
       return {
-        types: '',
+        types: this.value,
       }
     },
     methods: {
@@ -23,6 +24,12 @@ import CheckboxGroup from './CheckboxGroup';
         this.types = type;
         console.log('types = ', this.types);
         this.$emit('changeType', this.types);
+        this.$emit('input', type);
+      }
+    },
+    watch: {
+      value(newVal) {
+        this.types = newVal;
       }
     },
     components: {

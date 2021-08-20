@@ -14,7 +14,6 @@
   export default {
     name: "CheckboxGroup",
     props: {
-      // value: {},
       listItem: {},
       defaultVal: {
         default: () => []
@@ -22,18 +21,15 @@
     },
     data() {
       return {
-        // content: this.value,
         check: this.defaultVal
       }
-    },
-    methods: {
-      // handleInput (e) {
-      //   this.$emit('input', e.target.value)
-      // }
     },
     watch: {
       check(newVal) {
         this.$emit('input', newVal);
+      },
+      defaultVal(newVal) {
+        this.check = newVal;
       }
     }
   }

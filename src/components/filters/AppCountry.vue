@@ -5,23 +5,12 @@
 
         <form action="" @submit.prevent="" class="country-wrapper">
             <template v-if="filteredCountry.length">
-                <CheckboxGroup :list-item="filteredCountry" @input="setSelectCountry"></CheckboxGroup>
-<!--                <div v-for="country in filteredCountry" :key="country.id">-->
-<!--                    <label>-->
-<!--                        <input type="checkbox"  :name="country.name"-->
-<!--                               :value="country.name" v-model="selectCountryList">-->
-<!--                        {{country.name}}-->
-<!--                    </label>-->
-<!--                </div>-->
+                <CheckboxGroup :list-item="filteredCountry" :default-val="value" @input="setSelectCountry"></CheckboxGroup>
             </template>
             <template v-else>
                 <h3>Такой страны нет</h3>
             </template>
-
         </form>
-
-<!--        Выбранные страны = {{selectCountryList}}-->
-
     </div>
 </template>
 
@@ -31,19 +20,20 @@ import CheckboxGroup from './CheckboxGroup';
   export default {
     name: "AppCountry",
     props: {
-      countryList: {}
+      countryList: {},
+      value: {}
     },
     data() {
       return {
         searchString: '',
-        selectCountryList: []
+        selectCountryList: ['Алжир']
       }
     },
     methods: {
       setSelectCountry(countryList) {
         this.selectCountryList = countryList;
-        // console.log(this.selectCountryList)
         this.$emit('changeCountryList', this.selectCountryList);
+        this.$emit('input', countryList);
       }
     },
     computed: {

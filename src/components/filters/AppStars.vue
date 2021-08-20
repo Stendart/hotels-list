@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Звезды</h3>
-        <CheckboxGroup :list-item="transformStars" :default-val="stars" @input="setStars"></CheckboxGroup>
+        <CheckboxGroup :list-item="transformStars" :default-val="value" @input="setStars"></CheckboxGroup>
     </div>
 </template>
 
@@ -15,11 +15,12 @@ import CheckboxGroup from './CheckboxGroup';
       countStars: {
         type: Number,
         default: 5
-      }
+      },
+      value: {}
     },
     data() {
       return {
-        stars: ['1 звезда', '4 звезды'],
+        stars: this.value // ['1 звезда', '4 звезды'],
       }
     },
     methods: {
@@ -27,11 +28,13 @@ import CheckboxGroup from './CheckboxGroup';
         this.stars = stars;
         console.log(stars)
         this.$emit('changeStars', this.stars);
+        this.$emit('input', stars);
       },
-      // declOfNum(number, titles) { // проверка окончания существительного после числительного
-      //   const cases = [2, 0, 1, 1, 1, 2];
-      //   return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
-      // },
+    },
+    watch: {
+      value(newVal) {
+        this.stars = newVal;
+      }
     },
     computed: {
       transformStars() {
