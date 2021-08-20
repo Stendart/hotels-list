@@ -4,6 +4,10 @@
         <AppType :type-list="typeList"></AppType>
         <AppStars></AppStars>
         <ReviewsCount></ReviewsCount>
+        <Price></Price>
+
+        <button>Применить фильтр</button>
+        <button>Очистить фильтр</button>
     </div>
 </template>
 
@@ -12,6 +16,7 @@
     import AppType from './AppType';
     import AppStars from './AppStars';
     import ReviewsCount from './ReviewsCount';
+    import Price from './Price';
 
   export default {
     name: "AppFilters",
@@ -36,7 +41,8 @@
       AppCountry,
       AppType,
       AppStars,
-      ReviewsCount
+      ReviewsCount,
+      Price
     }
   }
 </script>
